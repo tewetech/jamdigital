@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jam Digital Modern</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* ==================================== */
+        /* === BAGIAN: DEFINISI VARIABEL CSS === */
+        /* ==================================== */
+
+        /* Variabel CSS untuk tema terang (default) */
+        :root {
+            /* Tema Default */
+            --bg-start-default: #f0f2f5;
+            --bg-end-default: #e0e5ec;
+            --main-number-color-default: #4a90e2;
+            --hover-shadow-color-default: rgba(0, 0, 0, 0.2);
+            --hover-text-color-default: #4a90e2;
+
+            /* Tema Sunset */
+            --bg-start-sunset: #ffde59;
+            --bg-end-sunset: #ff9933;
+            --main-number-color-sunset: #8d2e2b;
+            --hover-shadow-color-sunset: rgba(141, 46, 43, 0.3);
+            --hover-text-color-sunset: #8d2e2b;
+
+            /* Tema Forest */
+            --bg-start-forest: #d2f7cf;
+            --bg-end-forest: #96bb7c;
+            --main-number-color-forest: #3c6255;
+            --hover-shadow-color-forest: rgba(60, 98, 85, 0.3);
+            --hover-text-color-forest: #3c6255;
+            
+            /* Tema Ocean */
+            --bg-start-ocean: #8ecae6;
+            --bg-end-ocean: #219ebc;
+            --main-number-color-ocean: #023047;
+            --hover-shadow-color-ocean: rgba(2, 48, 71, 0.3);
+            --hover-text-color-ocean: #023047;
+
+            /* Variabel umum (light mode) */
+            --text-color: #333;
+            --secondary-number-color: #666;
+            --button-bg: rgba(255, 255, 255, 0.8);
+            --button-border: rgba(0, 0, 0, 0.1);
+            --button-color: #555;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --shadow-color-hover: rgba(0, 0, 0, 0.15);
+            
+            /* Atur tema awal ke 'default' */
+            --bg-start: var(--bg-start-default);
+            --bg-end: var(--bg-end-default);
+            --main-number-color: var(--main-number-color-default);
+            --hover-shadow-color: var(--hover-shadow-color-default);
+            --hover-text-color: var(--hover-text-color-default);
+        }
+
+        /* Variabel CSS untuk tema gelap (dark mode) */
+        body.dark-mode {
+            /* Tema Default (dark) */
+            --bg-start-default: #1c1c1c;
+            --bg-end-default: #2d2d2d;
+            --main-number-color-default: #6ab04c;
+            --hover-shadow-color-default: rgba(106, 176, 76, 0.4);
+            --hover-text-color-default: #6ab04c;
+
+            /* Tema Sunset (dark) */
+            --bg-start-sunset: #262137;
+            --bg-end-sunset: #1b162c;
+            --main-number-color-sunset: #ff7e5f;
+            --hover-shadow-color-sunset: rgba(255, 126, 95, 0.4);
+            --hover-text-color-sunset: #ff7e5f;
+
+            /* Tema Forest (dark) */
+            --bg-start-forest: #0a130d;
+            --bg-end-forest: #14281a;
+            --main-number-color-forest: #a9e0a9;
+            --hover-shadow-color-forest: rgba(169, 224, 169, 0.4);
+            --hover-text-color-forest: #a9e0a9;
+            
+            /* Tema Ocean (dark) */
+            --bg-start-ocean: #001f3f;
+            --bg-end-ocean: #00142b;
+            --main-number-color-ocean: #3498db;
+            --hover-shadow-color-ocean: rgba(52, 152, 219, 0.4);
+            --hover-text-color-ocean: #3498db;
+            
+            /* Variabel umum (dark mode) */
+            --text-color: #f5f5f5;
+            --secondary-number-color: #aaa;
+            --button-bg: rgba(45, 45, 45, 0.8);
+            --button-border: rgba(255, 255, 255, 0.1);
+            --button-color: #ccc;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --shadow-color-hover: rgba(0, 0, 0, 0.6);
+
+            /* Atur tema awal ke 'default' */
+            --bg-start: var(--bg-start-default);
+            --bg-end: var(--bg-end-default);
+            --main-number-color: var(--main-number-color-default);
+            --hover-shadow-color: var(--hover-shadow-color-default);
+            --hover-text-color: var(--hover-text-color-default);
+        }
+
+        /* ==================================== */
+        /* === BAGIAN: GAYA DASAR & UTAMA === */
+        /* ==================================== */
+        body {
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            margin: 0;
+            user-select: none;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        .digital-clock-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .time-unit-main {
+            display: flex;
+            align-items: flex-end; 
+        }
+
+        .time-unit-main .number {
+            font-size: 15rem;
+            font-weight: 700;
+            letter-spacing: -3px;
+            color: var(--main-number-color);
+            text-shadow: 1px 1px 2px var(--shadow-color);
+            animation: pulse-light 2s infinite alternate;
+        }
+        
+        .separator-main {
+            font-size: 15rem;
+            font-weight: 700;
+            color: var(--secondary-number-color);
+            margin: 0 20px;
+            opacity: 1;
+        }
+        
+        /* Gaya untuk kontainer hari dan tanggal */
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 5px; /* Jarak antara tanggal dan jam diubah menjadi 5px */
+        }
+        
+        /* Gaya untuk teks hari dan tanggal */
+        #current-day, #current-date {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--secondary-number-color);
+            opacity: 0.8;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .clock-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 5px; /* Jarak antara jam dan detik diubah menjadi 5px */
+            color: var(--secondary-number-color);
+            font-weight: 700;
+        }
+
+        #seconds {
+            font-size: 5rem;
+            letter-spacing: -1px;
+        }
+
+        #seconds-label {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-top: -10px;
+            opacity: 0.8;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .credit {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-color);
+            opacity: 0.6;
+            transition: color 0.5s ease, opacity 0.5s ease;
+        }
+
+        /* ==================================== */
+        /* === BAGIAN: TOMBOL & POP-UP === */
+        /* ==================================== */
+        #button-container {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .control-btn {
+            background-color: var(--button-bg);
+            color: var(--button-color);
+            border: 1px solid var(--button-border);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Gaya hover untuk tombol kontrol */
+        .control-btn:hover {
+            background-color: var(--button-bg);
+            color: var(--hover-text-color);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px var(--hover-shadow-color);
+        }
+        
+        /* Gaya Pop-up */
+        .popup-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .popup-container.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .popup-content {
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px var(--shadow-color-hover);
+            position: relative;
+            color: var(--text-color);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--button-border);
+            max-width: 90%;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .popup-container.show .popup-content {
+            transform: scale(1);
+        }
+
+        .popup-content h4 {
+            margin: 0 0 20px 0;
+            font-size: 1.5rem;
+        }
+        
+        .theme-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .theme-btn {
+            padding: 10px 20px;
+            border: 1px solid var(--button-border);
+            border-radius: 20px;
+            background-color: var(--button-bg);
+            color: var(--button-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        /* Gaya hover untuk tombol tema */
+        .theme-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--hover-shadow-color);
+            background-color: var(--button-bg);
+            color: var(--hover-text-color);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        /* ==================================== */
+        /* === BAGIAN: ANIMASI & MEDIA QUERY === */
+        /* ==================================== */
+        @keyframes pulse-light {
+            0% { transform: scale(1); text-shadow: 1px 1px 2px var(--shadow-color); }
+            100% { transform: scale(1.02); text-shadow: 2px 2px 4px var(--shadow-color); }
+        }
+
+        @media (max-width: 768px) {
+            .digital-clock-container .number {
+                font-size: 8rem;
+            }
+            .separator-main {
+                font-size: 8rem;
+                margin: 0 5px;
+            }
+            #seconds {
+                font-size: 4rem;
+            }
+            #seconds-label, #current-day, #current-date {
+                font-size: 1.2rem;
+            }
+            #button-container {
+                top: 20px;
+                right: 20px;
+            }
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 0.9rem;
+            }
+            .credit {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode default-theme">
+    <div class="header-container">
+        <span id="current-day"></span>
+        <span id="current-date"></span>
+    </div>
+    
+    <div class="digital-clock-container">
+        <div class="time-unit-main">
+            <span id="hours" class="number">00</span>
+        </div>
+        <span id="separator" class="separator-main">:</span>
+        <div class="time-unit-main">
+            <span id="minutes" class="number">00</span>
+        </div>
+    </div>
+    
+    <div class="clock-footer">
+        <span id="seconds">00</span>
+        <span id="seconds-label">DETIK</span>
+    </div>
+
+    <div class="credit">
+        Jam Digital By Tewe Tech
+    </div>
+
+    <div id="button-container">
+        <button id="mode-toggle-btn" class="control-btn">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button id="theme-toggle-btn" class="control-btn">
+            <i class="fas fa-palette"></i>
+        </button>
+        <button id="fullscreen-btn" class="control-btn">
+            <i id="fullscreen-icon" class="fa-solid fa-expand"></i>
+        </button>
+    </div>
+    
+    <div id="theme-popup" class="popup-container">
+        <div class="popup-content">
+            <h4>Pilih Tema</h4>
+            <div class="theme-options">
+                <button class="theme-btn" data-theme="default">Default</button>
+                <button class="theme-btn" data-theme="sunset">Sunset</button>
+                <button class="theme-btn" data-theme="forest">Forest</button>
+                <button class="theme-btn" data-theme="ocean">Ocean</button>
+            </div>
+            <button id="close-popup-btn" class="close-btn">&times;</button>
+        </div>
+    </div>
+
+    <script>
+        // ====================================
+        // === BAGIAN: FUNGSI JAVASCRIPT ===
+        // ====================================
+
+        // Mengambil elemen-elemen DOM
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        const fullscreenIcon = document.getElementById('fullscreen-icon');
+        const modeToggleBtn = document.getElementById('mode-toggle-btn');
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const themePopup = document.getElementById('theme-popup');
+        const closePopupBtn = document.getElementById('close-popup-btn');
+        const themeButtons = document.querySelectorAll('.theme-btn');
+        const body = document.body;
+        const currentDayEl = document.getElementById('current-day');
+        const currentDateEl = document.getElementById('current-date');
+
+        // Fungsi untuk memperbarui jam dan tanggal setiap detik
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            // Opsi untuk mendapatkan nama hari
+            const dayOptions = { weekday: 'long' };
+            const dayString = now.toLocaleDateString('id-ID', dayOptions);
+
+            // Opsi untuk mendapatkan tanggal
+            const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+            const dateString = now.toLocaleDateString('id-ID', dateOptions);
+
+            hoursEl.textContent = hours;
+            minutesEl.textContent = minutes;
+            secondsEl.textContent = seconds;
+            currentDayEl.textContent = dayString.toUpperCase();
+            currentDateEl.textContent = dateString.toUpperCase();
+        }
+
+        // Fungsi untuk mengaktifkan/menonaktifkan mode full screen
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    fullscreenIcon.classList.remove('fa-expand');
+                    fullscreenIcon.classList.add('fa-compress');
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    fullscreenIcon.classList.remove('fa-compress');
+                    fullscreenIcon.classList.add('fa-expand');
+                });
+            }
+        }
+
+        // Fungsi untuk mengubah tema dan menyimpan preferensi
+        function applyTheme(theme) {
+            const themeClasses = ['default-theme', 'sunset-theme', 'forest-theme', 'ocean-theme'];
+            body.classList.remove(...themeClasses);
+            body.classList.add(`${theme}-theme`);
+            
+            body.style.setProperty('--bg-start', `var(--bg-start-${theme})`);
+            body.style.setProperty('--bg-end', `var(--bg-end-${theme})`);
+            body.style.setProperty('--main-number-color', `var(--main-number-color-${theme})`);
+            
+            body.style.setProperty('--hover-shadow-color', `var(--hover-shadow-color-${theme})`);
+            body.style.setProperty('--hover-text-color', `var(--hover-text-color-${theme})`);
+            
+            localStorage.setItem('currentTheme', theme);
+        }
+
+        // Fungsi untuk mengaktifkan/menonaktifkan mode gelap
+        function toggleDarkMode() {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            
+            localStorage.setItem('darkMode', isDarkMode);
+
+            const icon = modeToggleBtn.querySelector('i');
+            if (isDarkMode) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+            
+            const currentTheme = localStorage.getItem('currentTheme') || 'default';
+            applyTheme(currentTheme);
+        }
+
+        // Fungsi untuk membuka pop-up tema
+        function openThemePopup() {
+            themePopup.classList.add('show');
+        }
+
+        // Fungsi untuk menutup pop-up tema
+        function closeThemePopup() {
+            themePopup.classList.remove('show');
+        }
+
+        // Cek preferensi mode gelap dan tema dari localStorage saat halaman dimuat
+        function loadPreferences() {
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+                const icon = modeToggleBtn.querySelector('i');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+            
+            const savedTheme = localStorage.getItem('currentTheme') || 'default';
+            applyTheme(savedTheme);
+        }
+
+        // ====================================
+        // === BAGIAN: EVENT LISTENERS ===
+        // ====================================
+
+        // Panggil fungsi updateClock setiap 1 detik
+        setInterval(updateClock, 1000);
+        
+        // Panggil fungsi updateClock pertama kali agar jam langsung muncul
+        updateClock();
+
+        // Tambahkan event listener ke tombol full screen
+        fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+        // Tambahkan event listener ke tombol mode terang/gelap
+        modeToggleBtn.addEventListener('click', toggleDarkMode);
+        
+        // Tambahkan event listener untuk membuka pop-up tema
+        themeToggleBtn.addEventListener('click', openThemePopup);
+        
+        // Tambahkan event listener untuk menutup pop-up tema
+        closePopupBtn.addEventListener('click', closeThemePopup);
+        themePopup.addEventListener('click', (e) => {
+            if (e.target === themePopup) {
+                closeThemePopup();
+            }
+        });
+
+        // Tambahkan event listener ke setiap tombol tema di dalam pop-up
+        themeButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const theme = event.target.getAttribute('data-theme');
+                applyTheme(theme);
+                closeThemePopup();
+            });
+        });
+        
+        // Panggil fungsi untuk memuat preferensi saat halaman dimuat
+        loadPreferences();
+    </script>
+</body>
+</html>
